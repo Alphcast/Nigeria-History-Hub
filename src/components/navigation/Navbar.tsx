@@ -1,0 +1,394 @@
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Menu,
+  X,
+  Shield,
+  ChevronDown,
+  BookOpen,
+  Calendar,
+  Image as ImageIcon,
+  Crown,
+  MapPin,
+  Layers,
+  Sun,
+  Moon,
+  Trophy,
+  Search,
+  Bookmark,
+  Building2,
+} from 'lucide-react';
+import { NigeriaEmblem } from '../common/NigeriaLogo';
+import { useTheme } from '../../context/ThemeContext';
+
+interface NavbarProps {
+  onOpenSearch?: () => void;
+  onOpenNominate?: () => void;
+  onOpenAdmin: () => void;
+  onOpenAI?: () => void;
+  activeSection: string;
+  setActiveSection: (sec: string) => void;
+  bookmarksCount?: number;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenSearch,
+  onOpenAdmin,
+  activeSection,
+  setActiveSection,
+  bookmarksCount = 0,
+}) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [exploreDropdownOpen, setExploreDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const { theme, toggleTheme } = useTheme();
+
+  const scrollTo = (id: string) => {
+    setActiveSection(id);
+    setMobileMenuOpen(false);
+    setExploreDropdownOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Close explore dropdown on outside click
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setExploreDropdownOpen(false);
+      }
+    };
+    if (exploreDropdownOpen) {
+      document.addEventListener('mousedown', handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [exploreDropdownOpen]);
+
+  // Primary top links shown directly on desktop
+  const primaryLinks = [
+    { label: 'Heroes', id: 'heroes' },
+    { label: 'Independence', id: 'timeline' },
+    { label: 'Regions', id: 'regional-history' },
+    { label: 'Leaders', id: 'leaders' },
+    { label: 'Sports', id: 'sports-legends' },
+    { label: '66 Cohort', id: 'sixty-six' },
+    { label: 'Records', id: 'records' },
+  ];
+
+  // Secondary items in the "Explore" dropdown
+  const exploreLinks = [
+    {
+      label: '30 Corporate Titans (Advert Archive)',
+      subtext: 'Pillars of industry & enterprise (1960–2026)',
+      id: 'corporate-titans',
+      icon: Building2,
+    },
+    {
+      label: 'Sports Legends & Records',
+      subtext: 'Olympic champions, football & athletics',
+      id: 'sports-legends',
+      icon: Trophy,
+    },
+    {
+      label: '36 States Cartography',
+      subtext: 'State-by-state heritage and pioneers',
+      id: 'map',
+      icon: MapPin,
+    },
+    {
+      label: 'Women of Nigeria',
+      subtext: "Her Story Is Nigeria's Story",
+      id: 'women',
+      icon: Crown,
+    },
+    {
+      label: 'Archival Photo Gallery',
+      subtext: 'Historical artifacts & photographs',
+      id: 'gallery',
+      icon: ImageIcon,
+    },
+    {
+      label: 'Today in History',
+      subtext: 'Daily Nigerian milestones & 66-day challenge',
+      id: 'on-this-day',
+      icon: Calendar,
+    },
+    {
+      label: 'Learn Nigeria',
+      subtext: 'Interactive quizzes, flashcards & syllabus',
+      id: 'learn',
+      icon: BookOpen,
+    },
+  ];
+
+  const isExploreActive = exploreLinks.some((l) => l.id === activeSection);
+
+  return (
+    <>
+      <header className="sticky top-0 z-40 w-full border-b border-emerald-500/20 bg-[#0d3d2e]/95 backdrop-blur-2xl transition-all shadow-md">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          
+          {/* Zone 1: Brand Wordmark with Official Nigeria Logo */}
+          <div className="flex shrink-0 items-center">
+            <button
+              onClick={() => scrollTo('hero')}
+              className="group flex items-center gap-3 text-left focus:outline-none"
+              aria-label="Nigeria History Hub Home"
+            >
+              {/* Authentic Nigeria Coat of Arms Emblem */}
+              <NigeriaEmblem size="md" className="shrink-0" />
+
+              {/* Title & Subtitle with guaranteed whitespace-nowrap */}
+              <div className="flex flex-col whitespace-nowrap">
+                <span className="font-display text-sm sm:text-base font-extrabold tracking-wider text-white transition-colors group-hover:text-emerald-400">
+                  NIGERIA HISTORY HUB
+                </span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-400/90">
+                  Federal Republic of Nigeria · @ 66
+                </span>
+              </div>
+            </button>
+          </div>
+
+          {/* Zone 2: Desktop Navigation Bar */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {primaryLinks.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className={`relative whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all ${
+                    isActive
+                      ? 'text-emerald-400 bg-emerald-500/10'
+                      : 'text-stone-300 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {item.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-emerald-400" />
+                  )}
+                </button>
+              );
+            })}
+
+            {/* Explore Dropdown for secondary collections */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setExploreDropdownOpen((prev) => !prev)}
+                className={`flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all ${
+                  isExploreActive || exploreDropdownOpen
+                    ? 'text-emerald-400 bg-emerald-500/10'
+                    : 'text-stone-300 hover:text-white hover:bg-white/5'
+                }`}
+                aria-expanded={exploreDropdownOpen}
+              >
+                <span>Explore</span>
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    exploreDropdownOpen ? 'rotate-180 text-emerald-400' : 'text-stone-400'
+                  }`}
+                />
+              </button>
+
+              {/* Floating Glass Dropdown Menu */}
+              {exploreDropdownOpen && (
+                <div className="absolute right-0 top-full mt-2 w-72 rounded-2xl border border-white/10 bg-[#114a38]/95 p-2 shadow-2xl backdrop-blur-2xl ring-1 ring-black/50 z-50">
+                  <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-emerald-400/80 border-b border-white/5">
+                    Special Archives & Learning
+                  </div>
+                  <div className="mt-1 space-y-1">
+                    {exploreLinks.map((item) => {
+                      const Icon = item.icon;
+                      const isActive = activeSection === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => scrollTo(item.id)}
+                          className={`flex w-full items-start gap-3 rounded-xl p-2.5 text-left transition-colors ${
+                            isActive
+                              ? 'bg-emerald-950/60 text-emerald-300'
+                              : 'text-stone-200 hover:bg-white/5 hover:text-white'
+                          }`}
+                        >
+                          <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            <Icon className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-semibold leading-snug">{item.label}</div>
+                            <div className="text-[10px] text-stone-400 leading-snug mt-0.5">
+                              {item.subtext}
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </nav>
+
+          {/* Zone 3: Actions & Utilities */}
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+            {/* Search & My Collection Button */}
+            {onOpenSearch && (
+              <button
+                onClick={onOpenSearch}
+                className="flex items-center gap-1.5 px-3 py-1.5 h-9 rounded-xl border border-emerald-400/40 bg-[#145742] text-white hover:bg-emerald-600 transition-all text-xs font-semibold shadow-sm group"
+                title="Search archive or open My Collection (Cmd+K)"
+                aria-label="Search archive or open My Collection"
+              >
+                <Search className="h-3.5 w-3.5 text-emerald-300 group-hover:scale-110 transition-transform" />
+                <span className="hidden sm:inline">Search & Collection</span>
+                {bookmarksCount > 0 && (
+                  <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-amber-400 text-stone-900 shadow">
+                    {bookmarksCount}
+                  </span>
+                )}
+                <kbd className="hidden xl:inline text-[10px] bg-black/25 text-emerald-200 px-1.5 py-0.5 rounded font-mono">
+                  ⌘K
+                </kbd>
+              </button>
+            )}
+
+            {/* Theme Toggle (Dark / Light Mode) */}
+            <button
+              onClick={toggleTheme}
+              className="flex shrink-0 items-center justify-center h-9 w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-200 transition-colors hover:bg-emerald-600 hover:text-white"
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Royal Emerald'} Mode`}
+              aria-label="Toggle dark/light theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-4 w-4 text-amber-300 hover:rotate-45 transition-transform" />
+              ) : (
+                <Moon className="h-4 w-4 text-emerald-600 hover:-rotate-12 transition-transform" />
+              )}
+            </button>
+
+            {/* Editorial Admin CMS Access */}
+            <button
+              onClick={onOpenAdmin}
+              className="flex shrink-0 items-center justify-center h-9 w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-300 transition-colors hover:bg-emerald-600 hover:text-white"
+              title="Editorial Admin CMS"
+              aria-label="Editorial Admin CMS"
+            >
+              <Shield className="h-4 w-4" />
+            </button>
+
+            {/* Mobile Menu Toggle button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex shrink-0 items-center justify-center h-9 w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-200 lg:hidden hover:bg-emerald-600 hover:text-white"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Drawer & Modal Overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 top-20 z-40 bg-[#0a2e21]/80 backdrop-blur-sm lg:hidden" onClick={() => setMobileMenuOpen(false)}>
+          <div
+            className="absolute inset-x-0 top-0 max-h-[85vh] overflow-y-auto border-b border-emerald-500/30 bg-[#0d3d2e] p-5 shadow-2xl sm:p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header info in drawer with Nigeria Emblem */}
+            <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2.5">
+                <NigeriaEmblem size="sm" />
+                <div>
+                  <span className="font-display text-xs font-bold text-white block">
+                    NIGERIA HISTORY HUB
+                  </span>
+                  <span className="text-[10px] uppercase tracking-wider text-emerald-400">
+                    Nigeria @ 66 Heritage Archive
+                  </span>
+                </div>
+              </div>
+              
+              {/* Theme Toggle in Mobile Drawer */}
+              <button
+                onClick={toggleTheme}
+                className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-stone-300"
+              >
+                {theme === 'dark' ? <Sun className="h-3.5 w-3.5 text-amber-300" /> : <Moon className="h-3.5 w-3.5 text-emerald-500" />}
+                <span className="text-[11px] capitalize">{theme}</span>
+              </button>
+            </div>
+
+            {/* Primary Navigation Grid */}
+            <div className="mb-5">
+              <div className="mb-2 text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                Core Sections
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {primaryLinks.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollTo(item.id)}
+                    className={`flex items-center gap-2 rounded-xl p-3 text-left text-xs font-medium transition-all ${
+                      activeSection === item.id
+                        ? 'bg-emerald-900/40 text-emerald-300 border border-emerald-500/30'
+                        : 'bg-white/5 text-stone-200 hover:bg-white/10 hover:text-white'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Special Collections */}
+            <div className="mb-5">
+              <div className="mb-2 text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                Special Archives & Learning
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {exploreLinks.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollTo(item.id)}
+                      className={`flex items-center gap-3 rounded-xl p-3 text-left text-xs transition-all ${
+                        activeSection === item.id
+                          ? 'bg-emerald-900/40 text-emerald-300 border border-emerald-500/30'
+                          : 'bg-white/5 text-stone-200 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <div>
+                        <div className="font-semibold">{item.label}</div>
+                        <div className="text-[10px] text-stone-400">{item.subtext}</div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Action button in mobile drawer */}
+            <div className="flex flex-col gap-2.5 border-t border-white/10 pt-4">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenAdmin();
+                }}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 py-2.5 text-xs text-stone-300 hover:bg-white/10 hover:text-white"
+              >
+                <Shield className="h-3.5 w-3.5 text-emerald-400" />
+                Editorial Admin CMS
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};

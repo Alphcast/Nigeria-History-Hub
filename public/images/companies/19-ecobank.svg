@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="100%" height="100%">
+  <rect width="300" height="100" rx="12" fill="#005A70"/>
+  <g transform="translate(30, 22)">
+    <path d="M5,42 Q25,12 55,28 Q85,44 115,22" stroke="#FFB81C" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <text x="10" y="36" font-family="Georgia, serif" font-style="italic" font-weight="900" font-size="34" fill="#FFFFFF" letter-spacing="1">Ecobank</text>
+    <text x="140" y="36" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#FFB81C" letter-spacing="2">NIGERIA</text>
+    <text x="12" y="50" font-family="Arial, sans-serif" font-weight="400" font-size="10" fill="#E0F2F1" letter-spacing="1">The Pan African Bank</text>
+  </g>
+</svg>

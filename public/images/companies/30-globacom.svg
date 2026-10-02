@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="100%" height="100%">
+  <rect width="300" height="100" rx="12" fill="#00A859"/>
+  <g transform="translate(35, 16)">
+    <!-- Vibrant Glo circular button -->
+    <circle cx="34" cy="34" r="28" fill="#76B82A"/>
+    <text x="34" y="44" font-family="Century Gothic, Arial, sans-serif" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle" letter-spacing="-1">glo</text>
+    <text x="75" y="36" font-family="Montserrat, Arial Black, sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="1">GLOBACOM</text>
+    <text x="77" y="50" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#D1FAE5" letter-spacing="2">NIGERIAS INDIGENOUS TELCO</text>
+  </g>
+</svg>

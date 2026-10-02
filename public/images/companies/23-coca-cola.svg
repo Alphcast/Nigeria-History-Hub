@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="100%" height="100%">
+  <rect width="300" height="100" rx="12" fill="#F40009"/>
+  <g transform="translate(30, 22)">
+    <text x="5" y="44" font-family="Brush Script MT, cursive, Georgia" font-style="italic" font-weight="700" font-size="44" fill="#FFFFFF" letter-spacing="0">Coca-Cola</text>
+    <text x="180" y="44" font-family="Arial, sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" letter-spacing="2">NIGERIA</text>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="100%" height="100%">
+  <rect width="300" height="100" rx="12" fill="#0B2521"/>
+  <g transform="translate(30, 20)">
+    <!-- Teal & Gold Flame Mark -->
+    <path d="M25,8 C35,20 40,32 32,46 C24,40 18,30 25,8 Z" fill="#00A887"/>
+    <path d="M30,20 C36,28 38,36 32,44 C26,40 24,32 30,20 Z" fill="#C69214"/>
+    <text x="56" y="36" font-family="Cinzel, Georgia, serif" font-weight="800" font-size="24" fill="#FFFFFF" letter-spacing="2">ARADEL</text>
+    <text x="58" y="50" font-family="Arial, sans-serif" font-weight="600" font-size="10" fill="#C69214" letter-spacing="3">HOLDINGS PLC</text>
+  </g>
+</svg>

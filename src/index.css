@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Cinzel', serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --primary-green: #008751;
+    --deep-green: #006B3C;
+    --dark-green: #064E3B;
+    --light-green: #EAF7EF;
+    --very-light-green: #F4FBF6;
+    --white: #FFFFFF;
+    --text-primary: #17352A;
+    --text-muted: #5F746A;
+    --border-subtle: #D8E9DE;
+    --emerald-base: #0d3d2e;
+    --emerald-card: #114a38;
+    --emerald-card-elevated: #165e47;
+    --gold-accent: #f59e0b;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-editorial {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+/* Human Design UI Elements */
+.btn-nigeria-primary {
+  background-color: #008751;
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-nigeria-primary:hover {
+  background-color: #009b5d;
+}
+
+.btn-nigeria-secondary {
+  background-color: #ffffff;
+  border: 1px solid #008751;
+  color: #006B3C;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-nigeria-secondary:hover {
+  background-color: #EAF7EF;
+}
+
+body {
+  background-color: #0d3d2e;
+  color: #f8fafc;
+}
+
+/* Attractive Royal Emerald Glass Panels */
+.glass-panel {
+  background: rgba(17, 74, 56, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.glass-panel-gold {
+  background: rgba(22, 94, 71, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.glass-panel-green {
+  background: rgba(20, 87, 66, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+/* Light Mode Overrides */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background-color: #F4FBF6;
+  color: #17352A;
+}
+
+html.light .bg-\[\#0d3d2e\] {
+  background-color: #F4FBF6 !important;
+}
+
+html.light .bg-\[\#114a38\],
+html.light .bg-\[\#145742\],
+html.light .bg-\[\#165e47\],
+html.light .bg-\[\#0f4a38\],
+html.light .bg-\[\#12543e\] {
+  background-color: #ffffff !important;
+  border-color: #D8E9DE !important;
+  box-shadow: 0 2px 10px rgba(0, 80, 45, 0.04);
+}
+
+html.light .border-white\/10,
+html.light .border-white\/5,
+html.light .border-white\/15,
+html.light .border-emerald-500\/20,
+html.light .border-emerald-500\/25,
+html.light .border-emerald-500\/30 {
+  border-color: #D8E9DE !important;
+}
+
+html.light .text-white {
+  color: #17352A !important;
+}
+
+html.light .text-stone-100 {
+  color: #17352A !important;
+}
+
+html.light .text-stone-200 {
+  color: #274538 !important;
+}
+
+html.light .text-stone-300 {
+  color: #435b50 !important;
+}
+
+html.light .text-stone-400 {
+  color: #5F746A !important;
+}
+
+html.light .bg-black\/40,
+html.light .bg-black\/50,
+html.light .bg-black\/60,
+html.light .bg-\[\#0a2e21\]\/80 {
+  background-color: #EAF7EF !important;
+}
+
+html.light .bg-white\/5 {
+  background-color: rgba(0, 107, 60, 0.04) !important;
+}
+
+html.light .bg-white\/10 {
+  background-color: rgba(0, 107, 60, 0.08) !important;
+}
+
+html.light header {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid #D8E9DE !important;
+}
+
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 80, 45, 0.12);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0d3d2e;
+}
+html.light ::-webkit-scrollbar-track {
+  background: #eef3f0;
+}
+::-webkit-scrollbar-thumb {
+  background: #196b52;
+  border-radius: 4px;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #86bfa3;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #008751;
+}

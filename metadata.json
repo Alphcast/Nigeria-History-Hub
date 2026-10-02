@@ -1,0 +1,6 @@
+{
+  "name": "Nigeria History Hub",
+  "description": "Nigeria @ 66 — Digital Heritage, Heroes & National History Platform celebrating 66 years of Nigerian independence (1960–2026).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

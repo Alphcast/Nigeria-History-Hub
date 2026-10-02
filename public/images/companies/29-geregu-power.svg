@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="100%" height="100%">
+  <rect width="300" height="100" rx="12" fill="#FFFFFF"/>
+  <g transform="translate(20, 18)">
+    <!-- Electric spark / turbine -->
+    <polygon points="26,10 12,34 24,34 18,54 38,26 26,26" fill="#F97316"/>
+    <text x="46" y="36" font-family="Arial Black, sans-serif" font-weight="900" font-size="22" fill="#0369A1" letter-spacing="1">GEREGU</text>
+    <text x="146" y="36" font-family="Arial, sans-serif" font-weight="900" font-size="16" fill="#F97316" letter-spacing="1">POWER</text>
+    <text x="48" y="52" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#64748B" letter-spacing="2">POWERING NIGERIAS FUTURE</text>
+  </g>
+</svg>
