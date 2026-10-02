@@ -113,8 +113,8 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* Main Display Headline */}
-        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6">
-          <span className="flex items-center justify-center gap-3 text-stone-300 text-2xl sm:text-3xl lg:text-4xl font-normal tracking-widest uppercase mb-2">
+        <h1 className="font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6">
+          <span className="flex items-center justify-center gap-2 sm:gap-3 text-stone-300 text-base sm:text-2xl md:text-3xl lg:text-4xl font-normal tracking-widest uppercase mb-2">
             <span>NIGERIA HISTORY HUB</span>
           </span>
           <span className="bg-gradient-to-r from-emerald-400 via-white to-emerald-400 bg-clip-text text-transparent">
@@ -123,20 +123,20 @@ export const Hero: React.FC<HeroProps> = ({
         </h1>
 
         {/* Core Rhythmic Tagline & Platform Definition */}
-        <div className="mx-auto max-w-3xl mb-8 space-y-2">
-          <p className="font-editorial text-xl sm:text-2xl md:text-3xl text-emerald-200/90 italic font-medium">
+        <div className="mx-auto max-w-3xl mb-8 space-y-2 px-2">
+          <p className="font-editorial text-lg sm:text-2xl md:text-3xl text-emerald-200/90 italic font-medium">
             "66 Years of History · 66 Years of People · 66 Years of Ideas"
           </p>
-          <p className="text-stone-300 text-sm sm:text-base leading-relaxed mt-4">
+          <p className="text-stone-300 text-xs sm:text-base leading-relaxed mt-4">
             <strong className="text-emerald-300 font-semibold">Nigeria History Hub</strong> is the definitive national digital repository celebrating 66 years of sovereign nationhood (1960–2026). Preserving our heritage, documenting iconic pioneers, heroes, and verified historical milestones that define Africa's giant.
           </p>
         </div>
 
-        {/* 3 Call-To-Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-14">
+        {/* 4 Call-To-Action Buttons: Full width on mobile, inline on desktop */}
+        <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-14 w-full max-w-md sm:max-w-none mx-auto">
           <button
             onClick={onExploreIcons}
-            className="group flex items-center gap-2.5 rounded-lg border border-emerald-500/50 bg-[#008751] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-950/60 transition-all hover:bg-[#009b5d] hover:scale-[1.02]"
+            className="group flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border border-emerald-500/50 bg-[#008751] px-5 sm:px-6 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-emerald-950/60 transition-all hover:bg-[#009b5d] active:scale-95"
           >
             <Compass className="h-4 w-4 transition-transform group-hover:rotate-45" />
             <span>Explore Nigerian Icons</span>
@@ -145,18 +145,18 @@ export const Hero: React.FC<HeroProps> = ({
 
           <button
             onClick={onExploreTimeline}
-            className="flex items-center gap-2.5 rounded-lg border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-medium text-stone-200 backdrop-blur-md transition-all hover:bg-white/10 hover:border-emerald-500/40 hover:text-white"
+            className="flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border border-white/15 bg-white/5 px-5 sm:px-6 py-3 sm:py-3.5 text-xs sm:text-sm font-medium text-stone-200 backdrop-blur-md transition-all hover:bg-white/10 hover:border-emerald-500/40 hover:text-white active:scale-95"
           >
             <Calendar className="h-4 w-4 text-emerald-400" />
-            <span>Explore Nigeria's Timeline</span>
+            <span>Explore Timeline</span>
           </button>
 
-          {/* Platform Creator & Lead Architect (Inserted right before Submit a Nigerian Hero) */}
+          {/* Platform Creator & Lead Architect */}
           <button
             onClick={onOpenCreator}
-            className="group flex items-center gap-2.5 rounded-lg border border-emerald-400/40 bg-gradient-to-r from-emerald-600/30 via-emerald-500/25 to-emerald-600/30 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:bg-emerald-600/40 hover:border-emerald-300 hover:scale-[1.02] shadow-lg shadow-emerald-950/40"
+            className="group flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border border-emerald-400/40 bg-gradient-to-r from-emerald-600/30 via-emerald-500/25 to-emerald-600/30 px-5 sm:px-6 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-white backdrop-blur-md transition-all hover:bg-emerald-600/40 hover:border-emerald-300 shadow-lg shadow-emerald-950/40 active:scale-95"
           >
-            <div className="h-6 w-6 rounded-full overflow-hidden border border-emerald-300 shrink-0 bg-emerald-900 flex items-center justify-center text-[10px] font-bold text-emerald-200 relative">
+            <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full overflow-hidden border border-emerald-300 shrink-0 bg-emerald-900 flex items-center justify-center text-[10px] font-bold text-emerald-200 relative">
               <span className="absolute inset-0 flex items-center justify-center font-bold text-[10px] text-emerald-200">
                 OR
               </span>
@@ -171,13 +171,13 @@ export const Hero: React.FC<HeroProps> = ({
                 />
               )}
             </div>
-            <span>Meet the Creator (NYSC)</span>
+            <span>Meet Creator (NYSC)</span>
             <Sparkles className="h-4 w-4 text-amber-300 group-hover:rotate-12 transition-transform" />
           </button>
 
           <button
             onClick={onSubmitHero}
-            className="flex items-center gap-2.5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-6 py-3.5 text-sm font-medium text-amber-200 backdrop-blur-md transition-all hover:bg-amber-500/20 hover:border-amber-400"
+            className="flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-5 sm:px-6 py-3 sm:py-3.5 text-xs sm:text-sm font-medium text-amber-200 backdrop-blur-md transition-all hover:bg-amber-500/20 hover:border-amber-400 active:scale-95"
           >
             <PlusCircle className="h-4 w-4 text-amber-400" />
             <span>Submit a Nigerian Hero</span>

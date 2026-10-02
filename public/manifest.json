@@ -1,0 +1,25 @@
+{
+  "name": "Nigeria History Hub",
+  "short_name": "Nigeria History",
+  "description": "The definitive digital heritage platform celebrating 66 years of sovereign Nigerian history, national heroes, and verified records.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d3d2e",
+  "theme_color": "#0d3d2e",
+  "categories": ["education", "history", "culture", "reference"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/nigeria-logo.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

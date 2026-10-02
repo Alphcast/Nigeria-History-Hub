@@ -48,44 +48,44 @@ export const PersonCard: React.FC<PersonCardProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-[#165e47] via-[#114a38]/20 to-transparent" />
 
         {/* Top Floating Controls */}
-        <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
+        <div className="absolute top-2 inset-x-2 sm:top-3 sm:inset-x-3 flex items-center justify-between z-10">
           {/* Verified Badge */}
           {person.verified && (
-            <span className="inline-flex items-center gap-1 rounded bg-[#0a2e21]/60 px-2 py-1 text-[10px] font-medium text-emerald-400 backdrop-blur-md border border-emerald-500/20">
-              <CheckCircle className="h-3 w-3 text-emerald-400" />
-              Verified Record
+            <span className="inline-flex items-center gap-1 rounded bg-[#0a2e21]/70 px-1.5 sm:px-2 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-medium text-emerald-400 backdrop-blur-md border border-emerald-500/20">
+              <CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-emerald-400" />
+              <span className="hidden xs:inline">Verified</span>
             </span>
           )}
 
           {/* Bookmark Button */}
           <button
             onClick={(e) => onToggleBookmark(person.id, e)}
-            className={`rounded-full p-2 backdrop-blur-md transition-colors ${
+            className={`rounded-full p-1.5 sm:p-2 backdrop-blur-md transition-all active:scale-90 ${
               isBookmarked
                 ? 'bg-amber-500 text-stone-950'
-                : 'bg-[#0a2e21]/50 text-stone-300 hover:bg-[#0a2e21]/80 hover:text-white'
+                : 'bg-[#0a2e21]/60 text-stone-300 hover:bg-[#0a2e21]/90 hover:text-white'
             }`}
             title={isBookmarked ? 'Remove bookmark' : 'Bookmark hero'}
             aria-label="Bookmark hero"
           >
-            <Bookmark className="h-3.5 w-3.5 fill-current" />
+            <Bookmark className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-current" />
           </button>
         </div>
 
         {/* State & Era Tag on bottom of image */}
-        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-stone-300 z-10">
-          <span className="text-emerald-400 font-medium">{person.state} State</span>
+        <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3 flex items-center justify-between text-[10px] sm:text-[11px] text-stone-300 z-10">
+          <span className="text-emerald-400 font-medium truncate">{person.state}</span>
           {primaryPosition?.era && (
-            <span className="text-stone-400 truncate max-w-[140px]">{primaryPosition.era}</span>
+            <span className="text-stone-400 truncate max-w-[80px] sm:max-w-[140px] text-[9px] sm:text-[10px]">{primaryPosition.era}</span>
           )}
         </div>
       </div>
 
       {/* Card Details */}
-      <div className="p-4 flex-1 flex flex-col justify-between">
+      <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
         <div>
           {/* Unboxed Metadata (Zero-Pill discipline) */}
-          <div className="flex items-center gap-2 text-[11px] text-emerald-400 uppercase tracking-wider font-medium mb-1">
+          <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-emerald-400 uppercase tracking-wider font-medium mb-1 truncate">
             <span>{person.categories[0]?.replace('-', ' ')}</span>
             {person.birthDate && (
               <>
@@ -96,27 +96,27 @@ export const PersonCard: React.FC<PersonCardProps> = ({
           </div>
 
           {/* Name */}
-          <h3 className="font-display text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">
+          <h3 className="font-display text-sm sm:text-lg font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-1 sm:line-clamp-none">
             {person.name}
           </h3>
 
           {/* Office / Profession */}
-          <p className="text-xs text-stone-300 font-medium mt-0.5 line-clamp-1">
+          <p className="text-[11px] sm:text-xs text-stone-300 font-medium mt-0.5 line-clamp-1">
             {primaryPosition?.title || person.profession.join(' · ')}
           </p>
 
           {/* Contribution teaser */}
           {primaryContribution && (
-            <p className="text-xs text-stone-400 mt-2.5 line-clamp-2 leading-relaxed">
+            <p className="text-[11px] sm:text-xs text-stone-400 mt-2 line-clamp-2 leading-relaxed hidden xs:block">
               {primaryContribution.description}
             </p>
           )}
         </div>
 
         {/* Card Footer Callout */}
-        <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-medium text-emerald-400 group-hover:text-emerald-300">
+        <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-white/5 flex items-center justify-between text-[11px] sm:text-xs font-medium text-emerald-400 group-hover:text-emerald-300">
           <span>Read Story</span>
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>
     </article>

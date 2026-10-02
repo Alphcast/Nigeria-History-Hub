@@ -34,24 +34,24 @@ export const PersonProfileModal: React.FC<PersonProfileModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 bg-[#0a2e21]/80 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-5xl max-h-[92vh] flex flex-col rounded-3xl border border-white/10 bg-[#165e47] text-stone-100 shadow-2xl overflow-hidden my-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 bg-[#0a2e21]/85 backdrop-blur-md overflow-y-auto">
+      <div className="relative w-full max-w-5xl h-[100dvh] sm:h-auto sm:max-h-[92vh] flex flex-col rounded-none sm:rounded-3xl border-0 sm:border border-white/10 bg-[#165e47] text-stone-100 shadow-2xl overflow-hidden my-auto">
         {/* Top Floating Control Bar */}
-        <div className="flex items-center justify-between border-b border-white/10 bg-[#165e47] px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400" />
-            <span className="text-xs uppercase tracking-widest text-emerald-400 font-medium">
+        <div className="flex items-center justify-between border-b border-white/10 bg-[#165e47] px-3.5 py-2.5 sm:px-6 sm:py-3 shrink-0">
+          <div className="flex items-center gap-2 min-w-0 truncate">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 shrink-0" />
+            <span className="text-[10px] sm:text-xs uppercase tracking-widest text-emerald-400 font-medium truncate">
               National Archive Biography
             </span>
-            <span className="text-stone-500">/</span>
-            <span className="text-xs text-stone-400 capitalize">{person.categories[0]?.replace('-', ' ')}</span>
+            <span className="text-stone-500 hidden xs:inline">/</span>
+            <span className="text-xs text-stone-400 capitalize hidden xs:inline">{person.categories[0]?.replace('-', ' ')}</span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Enter Story Mode CTA */}
             <button
               onClick={() => onEnterStoryMode(person)}
-              className="flex items-center gap-1.5 rounded-lg border border-emerald-500/40 bg-emerald-950/60 px-3 py-1.5 text-xs font-semibold text-emerald-300 transition-all hover:bg-emerald-900/80"
+              className="flex items-center gap-1.5 rounded-lg border border-emerald-500/40 bg-emerald-950/60 px-2.5 sm:px-3 py-1.5 text-xs font-semibold text-emerald-300 transition-all hover:bg-emerald-900/80 active:scale-95"
               title="Enter full-screen cinematic storytelling"
             >
               <Play className="h-3 w-3 fill-current" />
@@ -94,7 +94,7 @@ export const PersonProfileModal: React.FC<PersonProfileModalProps> = ({
         {/* Modal Body Container */}
         <div className="flex-1 overflow-y-auto">
           {/* Hero Banner Grid: Left Portrait / Right Core Specs */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8 bg-gradient-to-b from-[#0a1710] to-[#165e47] border-b border-white/5">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-4 sm:p-8 bg-gradient-to-b from-[#0a1710] to-[#165e47] border-b border-white/5">
             {/* Left Portrait Column (4 cols) */}
             <div className="md:col-span-4 flex flex-col items-center">
               <div className="relative aspect-[3/4] w-full max-w-[280px] rounded-2xl overflow-hidden border-2 border-emerald-500/30 shadow-2xl bg-stone-900">
@@ -231,8 +231,8 @@ export const PersonProfileModal: React.FC<PersonProfileModalProps> = ({
             </div>
           </div>
 
-          {/* Interactive Profile Navigation Tabs */}
-          <div className="flex items-center gap-2 border-b border-white/10 bg-[#145742] px-6 py-2 sticky top-0 z-20">
+          {/* Interactive Profile Navigation Tabs with Horizontal Touch Scroll */}
+          <div className="flex items-center gap-2 border-b border-white/10 bg-[#145742] px-3 sm:px-6 py-1.5 sm:py-2 sticky top-0 z-20 overflow-x-auto whitespace-nowrap scrollbar-none">
             <button
               onClick={() => setActiveTab('story')}
               className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold border-b-2 transition-colors ${
@@ -407,12 +407,12 @@ export const PersonProfileModal: React.FC<PersonProfileModalProps> = ({
           </div>
         </div>
 
-        {/* Modal Footer Bar */}
-        <div className="border-t border-white/10 bg-[#145742] px-6 py-3 flex items-center justify-between text-xs text-stone-400">
-          <span>Nigeria History Hub · Nigeria @ 66 Digital Heritage Platform</span>
+        {/* Modal Footer Bar with Safe Area */}
+        <div className="border-t border-white/10 bg-[#145742] px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between text-xs text-stone-400 shrink-0 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
+          <span className="truncate max-w-[200px] sm:max-w-none">Nigeria History Hub · Digital Archive</span>
           <button
             onClick={onClose}
-            className="text-stone-300 hover:text-white underline underline-offset-4"
+            className="text-stone-300 hover:text-white underline underline-offset-4 py-1 px-2"
           >
             Close Profile
           </button>

@@ -28,6 +28,7 @@ import { AdminDashboardModal } from './components/admin/AdminDashboardModal';
 import { HistoryAIAssistantModal } from './components/ai/HistoryAIAssistantModal';
 import { GlobalSearchModal } from './components/search/GlobalSearchModal';
 import { CreatorProfileModal } from './components/creator/CreatorProfileModal';
+import { MobileBottomNav } from './components/navigation/MobileBottomNav';
 
 import { Sparkles, Compass, PlusCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
@@ -44,6 +45,7 @@ export default function App() {
   const [aiAssistantOpen, setAiAssistantOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [creatorOpen, setCreatorOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [activeSection, setActiveSection] = useState('hero');
   const [bookmarks, setBookmarks] = useState<string[]>(getBookmarks());
@@ -82,12 +84,15 @@ export default function App() {
         onOpenNominate={() => setNominateOpen(true)}
         onOpenAdmin={() => setAdminOpen(true)}
         onOpenAI={() => setAiAssistantOpen(true)}
+        onOpenCreator={() => setCreatorOpen(true)}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
         bookmarksCount={bookmarks.length}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
       />
 
-      <main className="flex-1">
+      <main className="flex-1 pb-20 lg:pb-0">
         {/* 1. Hero & Live Countdown Section */}
         <Hero
           onExploreIcons={() => scrollTo('heroes')}
@@ -187,6 +192,16 @@ export default function App() {
         onOpenAdmin={() => setAdminOpen(true)}
         onOpenAI={() => setAiAssistantOpen(true)}
         setActiveSection={setActiveSection}
+      />
+
+      {/* Native Mobile Bottom Navigation App Bar (lg:hidden) */}
+      <MobileBottomNav
+        activeSection={activeSection}
+        onNavigate={scrollTo}
+        onOpenSearch={() => setSearchOpen(true)}
+        onOpenAI={() => setAiAssistantOpen(true)}
+        onOpenMenu={() => setMobileMenuOpen(true)}
+        bookmarksCount={bookmarks.length}
       />
 
       {/* Global Modals */}

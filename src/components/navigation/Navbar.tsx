@@ -9,13 +9,14 @@ import {
   Image as ImageIcon,
   Crown,
   MapPin,
-  Layers,
   Sun,
   Moon,
   Trophy,
   Search,
-  Bookmark,
   Building2,
+  Sparkles,
+  PlusCircle,
+  UserCheck,
 } from 'lucide-react';
 import { NigeriaEmblem } from '../common/NigeriaLogo';
 import { useTheme } from '../../context/ThemeContext';
@@ -25,26 +26,43 @@ interface NavbarProps {
   onOpenNominate?: () => void;
   onOpenAdmin: () => void;
   onOpenAI?: () => void;
+  onOpenCreator?: () => void;
   activeSection: string;
   setActiveSection: (sec: string) => void;
   bookmarksCount?: number;
+  mobileMenuOpen?: boolean;
+  setMobileMenuOpen?: (open: boolean) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenSearch,
+  onOpenNominate,
   onOpenAdmin,
+  onOpenAI,
+  onOpenCreator,
   activeSection,
   setActiveSection,
   bookmarksCount = 0,
+  mobileMenuOpen: controlledMobileMenuOpen,
+  setMobileMenuOpen: controlledSetMobileMenuOpen,
 }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [internalMobileMenuOpen, setInternalMobileMenuOpen] = useState(false);
+  const isMenuOpen = controlledMobileMenuOpen !== undefined ? controlledMobileMenuOpen : internalMobileMenuOpen;
+  const setMenuOpen = (open: boolean) => {
+    if (controlledSetMobileMenuOpen) {
+      controlledSetMobileMenuOpen(open);
+    } else {
+      setInternalMobileMenuOpen(open);
+    }
+  };
+
   const [exploreDropdownOpen, setExploreDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { theme, toggleTheme } = useTheme();
 
   const scrollTo = (id: string) => {
     setActiveSection(id);
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
     setExploreDropdownOpen(false);
     const el = document.getElementById(id);
     if (el) {
@@ -129,25 +147,25 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header className="sticky top-0 z-40 w-full border-b border-emerald-500/20 bg-[#0d3d2e]/95 backdrop-blur-2xl transition-all shadow-md">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8">
           
           {/* Zone 1: Brand Wordmark with Official Nigeria Logo */}
-          <div className="flex shrink-0 items-center">
+          <div className="flex shrink-0 items-center min-w-0">
             <button
               onClick={() => scrollTo('hero')}
-              className="group flex items-center gap-3 text-left focus:outline-none"
+              className="group flex items-center gap-2 sm:gap-3 text-left focus:outline-none min-w-0"
               aria-label="Nigeria History Hub Home"
             >
               {/* Authentic Nigeria Coat of Arms Emblem */}
-              <NigeriaEmblem size="md" className="shrink-0" />
+              <NigeriaEmblem size="md" className="shrink-0 scale-90 sm:scale-100" />
 
-              {/* Title & Subtitle with guaranteed whitespace-nowrap */}
-              <div className="flex flex-col whitespace-nowrap">
-                <span className="font-display text-sm sm:text-base font-extrabold tracking-wider text-white transition-colors group-hover:text-emerald-400">
+              {/* Title & Subtitle */}
+              <div className="flex flex-col min-w-0 truncate">
+                <span className="font-display text-xs sm:text-base font-extrabold tracking-wider text-white transition-colors group-hover:text-emerald-400 truncate">
                   NIGERIA HISTORY HUB
                 </span>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-400/90">
-                  Federal Republic of Nigeria · @ 66
+                <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-emerald-400/90 truncate">
+                  Nigeria @ 66 Archive
                 </span>
               </div>
             </button>
@@ -233,17 +251,17 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Zone 3: Actions & Utilities */}
-          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2.5">
             {/* Search & My Collection Button */}
             {onOpenSearch && (
               <button
                 onClick={onOpenSearch}
-                className="flex items-center gap-1.5 px-3 py-1.5 h-9 rounded-xl border border-emerald-400/40 bg-[#145742] text-white hover:bg-emerald-600 transition-all text-xs font-semibold shadow-sm group"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 h-8 sm:h-9 rounded-xl border border-emerald-400/40 bg-[#145742] text-white hover:bg-emerald-600 transition-all text-xs font-semibold shadow-sm group active:scale-95"
                 title="Search archive or open My Collection (Cmd+K)"
                 aria-label="Search archive or open My Collection"
               >
                 <Search className="h-3.5 w-3.5 text-emerald-300 group-hover:scale-110 transition-transform" />
-                <span className="hidden sm:inline">Search & Collection</span>
+                <span className="hidden md:inline">Search</span>
                 {bookmarksCount > 0 && (
                   <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-amber-400 text-stone-900 shadow">
                     {bookmarksCount}
@@ -255,10 +273,23 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             )}
 
+            {/* AI Assistant Quick Pill (Visible on tablet/desktop) */}
+            {onOpenAI && (
+              <button
+                onClick={onOpenAI}
+                className="hidden sm:flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 h-8 sm:h-9 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 transition-all text-xs font-semibold active:scale-95"
+                title="Ask Nigeria History AI"
+                aria-label="Ask Nigeria History AI"
+              >
+                <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+                <span className="hidden md:inline">History AI</span>
+              </button>
+            )}
+
             {/* Theme Toggle (Dark / Light Mode) */}
             <button
               onClick={toggleTheme}
-              className="flex shrink-0 items-center justify-center h-9 w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-200 transition-colors hover:bg-emerald-600 hover:text-white"
+              className="flex shrink-0 items-center justify-center h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-200 transition-colors hover:bg-emerald-600 hover:text-white active:scale-95"
               title={`Switch to ${theme === 'dark' ? 'Light' : 'Royal Emerald'} Mode`}
               aria-label="Toggle dark/light theme"
             >
@@ -269,10 +300,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </button>
 
-            {/* Editorial Admin CMS Access */}
+            {/* Editorial Admin CMS Access (hidden on tiny screens to avoid crowding; accessible in drawer) */}
             <button
               onClick={onOpenAdmin}
-              className="flex shrink-0 items-center justify-center h-9 w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-300 transition-colors hover:bg-emerald-600 hover:text-white"
+              className="hidden sm:flex shrink-0 items-center justify-center h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-300 transition-colors hover:bg-emerald-600 hover:text-white active:scale-95"
               title="Editorial Admin CMS"
               aria-label="Editorial Admin CMS"
             >
@@ -281,21 +312,24 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Mobile Menu Toggle button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="flex shrink-0 items-center justify-center h-9 w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-200 lg:hidden hover:bg-emerald-600 hover:text-white"
+              onClick={() => setMenuOpen(!isMenuOpen)}
+              className="flex shrink-0 items-center justify-center h-8 w-8 sm:h-9 sm:w-9 rounded-xl border border-emerald-500/25 bg-[#145742]/70 text-stone-200 lg:hidden hover:bg-emerald-600 hover:text-white active:scale-95"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? <X className="h-4 w-4 sm:h-5 sm:w-5" /> : <Menu className="h-4 w-4 sm:h-5 sm:w-5" />}
             </button>
           </div>
         </div>
       </header>
 
       {/* Mobile Drawer & Modal Overlay */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 top-20 z-40 bg-[#0a2e21]/80 backdrop-blur-sm lg:hidden" onClick={() => setMobileMenuOpen(false)}>
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 top-16 sm:top-20 z-40 bg-[#0a2e21]/85 backdrop-blur-md lg:hidden"
+          onClick={() => setMenuOpen(false)}
+        >
           <div
-            className="absolute inset-x-0 top-0 max-h-[85vh] overflow-y-auto border-b border-emerald-500/30 bg-[#0d3d2e] p-5 shadow-2xl sm:p-6"
+            className="absolute inset-x-0 top-0 max-h-[82vh] overflow-y-auto border-b border-emerald-500/30 bg-[#0d3d2e] p-4 sm:p-6 shadow-2xl pb-12"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header info in drawer with Nigeria Emblem */}
@@ -320,6 +354,35 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {theme === 'dark' ? <Sun className="h-3.5 w-3.5 text-amber-300" /> : <Moon className="h-3.5 w-3.5 text-emerald-500" />}
                 <span className="text-[11px] capitalize">{theme}</span>
               </button>
+            </div>
+
+            {/* Quick Action Buttons on Mobile */}
+            <div className="grid grid-cols-2 gap-2 mb-5">
+              {onOpenNominate && (
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    onOpenNominate();
+                  }}
+                  className="flex items-center justify-center gap-1.5 rounded-xl bg-[#008751] px-3 py-2.5 text-xs font-bold text-white shadow"
+                >
+                  <PlusCircle className="h-3.5 w-3.5" />
+                  <span>Nominate Hero</span>
+                </button>
+              )}
+
+              {onOpenAI && (
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    onOpenAI();
+                  }}
+                  className="flex items-center justify-center gap-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 px-3 py-2.5 text-xs font-bold text-amber-300"
+                >
+                  <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+                  <span>History AI</span>
+                </button>
+              )}
             </div>
 
             {/* Primary Navigation Grid */}
@@ -373,17 +436,30 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
 
-            {/* Action button in mobile drawer */}
-            <div className="flex flex-col gap-2.5 border-t border-white/10 pt-4">
+            {/* Secondary actions in mobile drawer */}
+            <div className="flex flex-col gap-2 border-t border-white/10 pt-4">
+              {onOpenCreator && (
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    onOpenCreator();
+                  }}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 py-2.5 text-xs font-medium text-emerald-300 hover:bg-white/10"
+                >
+                  <UserCheck className="h-3.5 w-3.5" />
+                  <span>Meet Platform Creator (NYSC OS/26B/3050)</span>
+                </button>
+              )}
+
               <button
                 onClick={() => {
-                  setMobileMenuOpen(false);
+                  setMenuOpen(false);
                   onOpenAdmin();
                 }}
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 py-2.5 text-xs text-stone-300 hover:bg-white/10 hover:text-white"
               >
                 <Shield className="h-3.5 w-3.5 text-emerald-400" />
-                Editorial Admin CMS
+                <span>Editorial Admin CMS</span>
               </button>
             </div>
           </div>

@@ -36,13 +36,13 @@ export const WomenSection: React.FC<WomenSectionProps> = ({ people, onSelectPers
         </div>
       </div>
 
-      {/* Grid of Women Trailblazers */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Grid of Women Trailblazers: 2 cols on mobile, 3 on desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         {womenHeroes.map((person) => (
           <div
             key={person.id}
             onClick={() => onSelectPerson(person)}
-            className="group cursor-pointer rounded-2xl border border-white/10 bg-[#165e47] overflow-hidden transition-all duration-300 hover:border-rose-500/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-950/20 flex flex-col justify-between"
+            className="group cursor-pointer rounded-xl sm:rounded-2xl border border-white/10 bg-[#165e47] overflow-hidden transition-all duration-300 hover:border-rose-500/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-950/20 flex flex-col justify-between"
           >
             <div>
               {/* Image banner */}
@@ -55,28 +55,28 @@ export const WomenSection: React.FC<WomenSectionProps> = ({ people, onSelectPers
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#165e47] via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs">
-                  <span className="text-rose-400 font-medium">{person.state} State</span>
-                  <span className="text-stone-300 text-[11px]">{person.birthDate}</span>
+                <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-4 sm:right-4 flex items-center justify-between text-[10px] sm:text-xs">
+                  <span className="text-rose-400 font-medium truncate">{person.state}</span>
+                  <span className="text-stone-300 text-[9px] sm:text-[11px] truncate">{person.birthDate}</span>
                 </div>
               </div>
 
-              <div className="p-5">
-                <div className="text-[11px] uppercase tracking-wider text-rose-300 font-medium mb-1">
+              <div className="p-3 sm:p-5">
+                <div className="text-[9px] sm:text-[11px] uppercase tracking-wider text-rose-300 font-medium mb-1 truncate">
                   {person.profession.slice(0, 2).join(' · ')}
                 </div>
-                <h3 className="font-display text-lg font-bold text-white group-hover:text-rose-300 transition-colors">
+                <h3 className="font-display text-xs sm:text-lg font-bold text-white group-hover:text-rose-300 transition-colors line-clamp-1 sm:line-clamp-none">
                   {person.name}
                 </h3>
-                <p className="text-xs text-stone-300 mt-2 line-clamp-3 leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-stone-300 mt-1 sm:mt-2 line-clamp-2 sm:line-clamp-3 leading-relaxed hidden xs:block">
                   {person.whyTheyMatter}
                 </p>
               </div>
             </div>
 
-            <div className="p-5 pt-0 flex items-center justify-between text-xs font-semibold text-rose-400 group-hover:text-rose-300">
-              <span>Read Her Story</span>
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            <div className="p-3 sm:p-5 pt-0 flex items-center justify-between text-[11px] sm:text-xs font-semibold text-rose-400 group-hover:text-rose-300">
+              <span>Read Story</span>
+              <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform group-hover:translate-x-1" />
             </div>
           </div>
         ))}

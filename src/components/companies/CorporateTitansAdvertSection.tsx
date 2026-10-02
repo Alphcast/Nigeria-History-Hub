@@ -25,6 +25,7 @@ export const CorporateTitansAdvertSection: React.FC = () => {
   const [showAllGrid, setShowAllGrid] = useState(false);
   const progressTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [progress, setProgress] = useState(0);
+  const touchStartXRef = useRef<number | null>(null);
 
   const SLIDE_DURATION = 4500; // 4.5 seconds per advert slide
   const TICK_INTERVAL = 50;
@@ -40,6 +41,21 @@ export const CorporateTitansAdvertSection: React.FC = () => {
     setCurrentIndex((prev) => (prev - 1 + CORPORATE_TITANS.length) % CORPORATE_TITANS.length);
     setProgress(0);
   }, []);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    const diff = e.changedTouches[0].clientX - touchStartXRef.current;
+    if (diff > 50) {
+      handlePrev();
+    } else if (diff < -50) {
+      handleNext();
+    }
+    touchStartXRef.current = null;
+  };
 
   const handleSelectCompany = (index: number) => {
     setCurrentIndex(index);
@@ -111,8 +127,12 @@ export const CorporateTitansAdvertSection: React.FC = () => {
           </p>
         </div>
 
-        {/* ONE-BY-ONE ADVERT SHOWCASE BILLBOARD */}
-        <div className="relative mx-auto max-w-5xl rounded-3xl border-2 border-emerald-500/40 bg-gradient-to-br from-[#0c392c] via-[#104a37] to-[#0c392c] shadow-2xl overflow-hidden p-6 sm:p-10 mb-10">
+        {/* ONE-BY-ONE ADVERT SHOWCASE BILLBOARD WITH TOUCH SWIPE */}
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="relative mx-auto max-w-5xl rounded-2xl sm:rounded-3xl border-2 border-emerald-500/40 bg-gradient-to-br from-[#0c392c] via-[#104a37] to-[#0c392c] shadow-2xl overflow-hidden p-4 sm:p-10 mb-10 select-none"
+        >
           {/* Top Progress countdown bar */}
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-black/40">
             <div

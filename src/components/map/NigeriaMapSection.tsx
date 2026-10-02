@@ -42,34 +42,34 @@ export const NigeriaMapSection: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         {/* Left Column: Interactive Map Grid Selector */}
-        <div className="lg:col-span-6 rounded-3xl border border-white/10 bg-[#165e47] p-6 sm:p-8 flex flex-col justify-between">
-          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+        <div className="lg:col-span-6 rounded-2xl sm:rounded-3xl border border-white/10 bg-[#165e47] p-4 sm:p-8 flex flex-col justify-between">
+          <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-white/10 mb-3 sm:mb-4">
             <span className="text-xs uppercase tracking-wider text-emerald-400 font-semibold">
               State Grid Navigator
             </span>
-            <span className="text-xs text-stone-400">36 States + FCT Abuja</span>
+            <span className="text-xs text-stone-400">36 States + FCT</span>
           </div>
 
           {/* Clean 6-zone interactive buttons */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 max-h-[460px] overflow-y-auto pr-1">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5 sm:gap-2 max-h-[420px] sm:max-h-[460px] overflow-y-auto pr-1">
             {NIGERIA_STATES_DATA.map((st) => {
               const active = st.code === selectedStateCode;
               return (
                 <button
                   key={st.code}
                   onClick={() => setSelectedStateCode(st.code)}
-                  className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all ${
+                  className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-xl border text-center transition-all active:scale-95 ${
                     active
-                      ? 'border-emerald-400 bg-emerald-950/80 text-white shadow-md shadow-emerald-950/60 scale-105'
+                      ? 'border-emerald-400 bg-emerald-950/80 text-white shadow-md shadow-emerald-950/60 scale-102'
                       : 'border-white/5 bg-black/40 text-stone-300 hover:bg-white/5 hover:border-white/20'
                   }`}
                 >
-                  <span className={`text-xs font-bold ${active ? 'text-emerald-300' : 'text-white'}`}>
+                  <span className={`text-[11px] sm:text-xs font-bold leading-tight ${active ? 'text-emerald-300' : 'text-white'} truncate w-full`}>
                     {st.name}
                   </span>
-                  <span className="text-[10px] text-stone-400 mt-0.5 truncate w-full">
+                  <span className="text-[9px] sm:text-[10px] text-stone-400 mt-0.5 truncate w-full">
                     {st.capital}
                   </span>
                 </button>
@@ -77,14 +77,14 @@ export const NigeriaMapSection: React.FC = () => {
             })}
           </div>
 
-          <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-stone-400">
-            <span>Click any state above to inspect heritage</span>
+          <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] text-stone-400">
+            <span>Tap any state to inspect</span>
             <span className="text-emerald-400 font-mono">Zone: {currentState.zone}</span>
           </div>
         </div>
 
         {/* Right Column: Selected State Heritage Dossier */}
-        <div className="lg:col-span-6 rounded-3xl border border-emerald-500/30 bg-[#145742] p-6 sm:p-8 shadow-2xl">
+        <div className="lg:col-span-6 rounded-2xl sm:rounded-3xl border border-emerald-500/30 bg-[#145742] p-4 sm:p-8 shadow-2xl">
           <div className="flex items-start justify-between pb-4 border-b border-white/10 mb-6">
             <div>
               <span className="text-xs uppercase tracking-widest text-emerald-400 font-mono">

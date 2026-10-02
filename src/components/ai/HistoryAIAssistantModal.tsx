@@ -109,28 +109,28 @@ export const HistoryAIAssistantModal: React.FC<HistoryAIAssistantModalProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md">
-      <div className="relative w-full max-w-2xl rounded-3xl border border-amber-500/30 bg-[#165e47] text-stone-100 shadow-2xl flex flex-col h-[650px] max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md">
+      <div className="relative w-full max-w-2xl rounded-2xl sm:rounded-3xl border border-amber-500/30 bg-[#165e47] text-stone-100 shadow-2xl flex flex-col h-[92dvh] sm:h-[650px] overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/10 bg-[#165e47] px-6 py-4">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300">
-              <Sparkles className="h-4 w-4" />
+        <div className="flex items-center justify-between border-b border-white/10 bg-[#165e47] px-3.5 sm:px-6 py-2.5 sm:py-4 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            <span className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300">
+              <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </span>
-            <div>
-              <h2 className="font-display text-sm font-bold text-white flex items-center gap-2">
-                Nigeria History AI Assistant
-                <span className="rounded bg-emerald-950/80 border border-emerald-500/30 px-1.5 py-0.5 text-[9px] font-mono text-emerald-300">
-                  Verified Archive Only
+            <div className="min-w-0 truncate">
+              <h2 className="font-display text-xs sm:text-sm font-bold text-white flex items-center gap-2 truncate">
+                <span>Nigeria History AI</span>
+                <span className="rounded bg-emerald-950/80 border border-emerald-500/30 px-1.5 py-0.5 text-[8px] sm:text-[9px] font-mono text-emerald-300 hidden xs:inline">
+                  Verified Archive
                 </span>
               </h2>
-              <span className="text-[10px] text-stone-400">
+              <span className="text-[9px] sm:text-[10px] text-stone-400 block truncate">
                 Nigeria History Hub (Anti-Hallucination Guardrails)
               </span>
             </div>
           </div>
-          <button onClick={onClose} className="p-1.5 text-stone-400 hover:text-white" aria-label="Close">
-            <X className="h-5 w-5" />
+          <button onClick={onClose} className="p-1.5 text-stone-400 hover:text-white shrink-0" aria-label="Close">
+            <X className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
 
@@ -184,7 +184,7 @@ export const HistoryAIAssistantModal: React.FC<HistoryAIAssistantModalProps> = (
         </div>
 
         {/* Input Bar */}
-        <div className="border-t border-white/10 bg-[#165e47] p-4">
+        <div className="border-t border-white/10 bg-[#165e47] p-3 sm:p-4 shrink-0 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -196,19 +196,19 @@ export const HistoryAIAssistantModal: React.FC<HistoryAIAssistantModalProps> = (
               type="text"
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
-              placeholder="Ask a question about Nigerian history, leaders, or records..."
-              className="flex-1 rounded-xl border border-white/10 bg-[#0a2e21]/50 px-4 py-2.5 text-xs text-stone-100 placeholder-stone-500 focus:border-amber-500 focus:outline-none"
+              placeholder="Ask about Nigerian history, leaders, or records..."
+              className="flex-1 rounded-xl border border-white/10 bg-[#0a2e21]/50 px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs text-stone-100 placeholder-stone-500 focus:border-amber-500 focus:outline-none"
             />
             <button
               type="submit"
               disabled={!inputQuery.trim() || loading}
-              className="rounded-xl bg-amber-500 p-2.5 text-stone-950 hover:bg-amber-400 transition-colors disabled:opacity-40"
+              className="rounded-xl bg-amber-500 p-2 sm:p-2.5 text-stone-950 hover:bg-amber-400 transition-colors disabled:opacity-40 shrink-0"
               aria-label="Send query"
             >
               <Send className="h-4 w-4" />
             </button>
           </form>
-          <div className="mt-2 text-center text-[10px] text-stone-500">
+          <div className="mt-2 text-center text-[9px] sm:text-[10px] text-stone-400">
             Nigeria History AI responds exclusively from verified archival records.
           </div>
         </div>

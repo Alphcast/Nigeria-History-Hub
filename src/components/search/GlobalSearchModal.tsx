@@ -263,26 +263,26 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center p-3 sm:p-4 pt-12 sm:pt-16 bg-[#0a2e21]/80 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-2xl rounded-3xl border border-emerald-500/30 bg-[#0d3d2e] shadow-2xl text-stone-100 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-start justify-center p-2 sm:p-4 pt-3 sm:pt-16 bg-[#0a2e21]/85 backdrop-blur-md overflow-y-auto">
+      <div className="relative w-full max-w-2xl max-h-[92dvh] flex flex-col rounded-2xl sm:rounded-3xl border border-emerald-500/30 bg-[#0d3d2e] shadow-2xl text-stone-100 overflow-hidden my-auto sm:my-0">
         {/* Top Header Mode Switcher (Search vs My Collection) */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-emerald-500/20 bg-[#104a37]">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-emerald-500/20 bg-[#104a37] shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <button
               onClick={() => setActiveTab('search')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 activeTab === 'search'
                   ? 'bg-emerald-500 text-white shadow-sm'
                   : 'text-stone-300 hover:text-white hover:bg-emerald-900/40'
               }`}
             >
               <Search className="h-3.5 w-3.5" />
-              <span>Search Archive</span>
+              <span>Search</span>
             </button>
 
             <button
               onClick={() => setActiveTab('collection')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 activeTab === 'collection'
                   ? 'bg-emerald-500 text-white shadow-sm'
                   : 'text-stone-300 hover:text-white hover:bg-emerald-900/40'
@@ -299,10 +299,11 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onClose}
-              className="p-1.5 text-stone-400 hover:text-white rounded-lg hover:bg-emerald-900/50 transition-colors"
+              className="p-1.5 text-stone-400 hover:text-white rounded-lg hover:bg-emerald-900/50 transition-colors flex items-center gap-1"
               aria-label="Close"
             >
-              <span className="text-[11px] bg-white/10 px-2 py-0.5 rounded font-mono">ESC</span>
+              <X className="h-4 w-4" />
+              <span className="text-[11px] bg-white/10 px-2 py-0.5 rounded font-mono hidden sm:inline">ESC</span>
             </button>
           </div>
         </div>

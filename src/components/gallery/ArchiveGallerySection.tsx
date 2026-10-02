@@ -54,13 +54,13 @@ export const ArchiveGallerySection: React.FC = () => {
         ))}
       </div>
 
-      {/* Masonry-Style Gallery Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Masonry-Style Gallery Grid: 2 cols on mobile, 4 on desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {filteredItems.map((item) => (
           <div
             key={item.id}
             onClick={() => setActiveModalItem(item)}
-            className="group cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-[#165e47] hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between"
+            className="group cursor-pointer overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-[#165e47] hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between"
           >
             <div>
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-stone-900">
@@ -71,31 +71,31 @@ export const ArchiveGallerySection: React.FC = () => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d3d2e]/80 via-transparent to-transparent" />
-                <div className="absolute top-2.5 right-2.5">
-                  <span className="rounded bg-[#0a2e21]/60 backdrop-blur-md px-2 py-0.5 text-[9px] font-mono font-medium text-emerald-400 border border-emerald-500/20">
+                <div className="absolute top-2 right-2">
+                  <span className="rounded bg-[#0a2e21]/70 backdrop-blur-md px-1.5 py-0.5 text-[8px] sm:text-[9px] font-mono font-medium text-emerald-400 border border-emerald-500/20">
                     {item.license}
                   </span>
                 </div>
-                <div className="absolute bottom-2.5 left-3 right-3 text-xs text-stone-300 font-mono">
+                <div className="absolute bottom-2 left-2 right-2 text-[10px] sm:text-xs text-stone-300 font-mono truncate">
                   {item.date}
                 </div>
               </div>
 
-              <div className="p-4">
-                <span className="text-[10px] uppercase tracking-wider text-emerald-400 font-medium block mb-1">
+              <div className="p-3 sm:p-4">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-emerald-400 font-medium block mb-1 truncate">
                   {item.category}
                 </span>
-                <h3 className="font-display text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
+                <h3 className="font-display text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-1 sm:line-clamp-none">
                   {item.title}
                 </h3>
-                <p className="text-xs text-stone-400 mt-2 line-clamp-2 leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-stone-400 mt-1 sm:mt-2 line-clamp-2 leading-relaxed hidden xs:block">
                   {item.caption}
                 </p>
               </div>
             </div>
 
-            <div className="p-4 pt-0 text-[10px] text-stone-500 border-t border-white/5 flex items-center justify-between">
-              <span className="truncate max-w-[180px]">{item.source}</span>
+            <div className="p-3 sm:p-4 pt-0 text-[9px] sm:text-[10px] text-stone-500 border-t border-white/5 flex items-center justify-between">
+              <span className="truncate max-w-[120px] sm:max-w-[180px]">{item.source}</span>
               <Maximize2 className="h-3 w-3 text-stone-400 group-hover:text-white" />
             </div>
           </div>

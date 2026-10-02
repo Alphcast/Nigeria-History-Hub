@@ -607,42 +607,42 @@ export const SportsSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Athletes Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {/* Athletes Grid: 2 cols on mobile, up to 4 on desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
             {filteredAthletes.map((athlete) => (
               <div
                 key={athlete.id}
                 onClick={() => setSelectedAthlete(athlete)}
-                className="group cursor-pointer rounded-xl border border-[#D8E9DE] dark:border-emerald-900/30 bg-white dark:bg-[#145742] p-5 flex flex-col justify-between hover:border-[#008751] hover:shadow-md transition-all"
+                className="group cursor-pointer rounded-xl border border-[#D8E9DE] dark:border-emerald-900/30 bg-white dark:bg-[#145742] p-3 sm:p-5 flex flex-col justify-between hover:border-[#008751] hover:shadow-md transition-all"
               >
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-stone-100 dark:bg-stone-800">
                     <img
                       src={athlete.photoUrl}
                       alt={athlete.name}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-2 right-2 px-2 py-0.5 rounded text-[10px] font-bold bg-white/90 dark:bg-[#0a2e21]/80 text-[#17352A] dark:text-white shadow-sm border border-stone-200 dark:border-stone-800">
+                    <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold bg-white/90 dark:bg-[#0a2e21]/80 text-[#17352A] dark:text-white shadow-sm border border-stone-200 dark:border-stone-800">
                       {athlete.sport}
                     </div>
                   </div>
 
                   <div>
-                    <div className="text-[11px] font-semibold text-[#006B3C] dark:text-emerald-400">
+                    <div className="text-[9px] sm:text-[11px] font-semibold text-[#006B3C] dark:text-emerald-400 truncate">
                       {athlete.primaryEventOrPosition}
                     </div>
-                    <h4 className="font-display font-bold text-base text-[#17352A] dark:text-white mt-0.5">
+                    <h4 className="font-display font-bold text-xs sm:text-base text-[#17352A] dark:text-white mt-0.5 line-clamp-1 sm:line-clamp-none">
                       {athlete.name}
                     </h4>
-                    <p className="text-xs text-[#5F746A] dark:text-stone-400 mt-1 line-clamp-2">
+                    <p className="text-[11px] sm:text-xs text-[#5F746A] dark:text-stone-400 mt-1 line-clamp-2 hidden xs:block">
                       {athlete.tagline}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-[#D8E9DE] dark:border-emerald-950 flex items-center justify-between text-xs font-semibold text-[#006B3C] dark:text-emerald-400">
-                  <span>View Full Profile</span>
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-[#D8E9DE] dark:border-emerald-950 flex items-center justify-between text-[11px] sm:text-xs font-semibold text-[#006B3C] dark:text-emerald-400">
+                  <span>Profile</span>
+                  <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             ))}
